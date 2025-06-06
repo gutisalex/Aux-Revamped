@@ -11,8 +11,8 @@ local tooltip = require 'aux.core.tooltip'
 
 local price_per_unit = false
 
-local HEAD_HEIGHT = 27
-local HEAD_SPACE = 2
+local HEAD_HEIGHT = 32
+local HEAD_SPACE = -2
 
 local TIME_LEFT_STRINGS = {
 	aux.color.red'30m', -- Short
@@ -65,7 +65,7 @@ end
 
 M.search_columns = {
     {
-        title = 'Item',
+        title = 'Item:',
         width = .35,
         init = item_column_init,
         fill = item_column_fill,
@@ -74,7 +74,7 @@ M.search_columns = {
         end,
     },
     {
-        title = 'Lvl',
+        title = 'Lvl:',
         width = .035,
         align = 'CENTER',
         fill = function(cell, record)
@@ -87,7 +87,7 @@ M.search_columns = {
         end,
     },
     {
-        title = 'Auctions',
+        title = 'Auctions:',
         width = .06,
         align = 'CENTER',
         fill = function(cell, record, count, own, expandable)
@@ -111,7 +111,7 @@ M.search_columns = {
         end,
     },
     {
-        title = 'Stack\nSize',
+        title = 'Stack\nSize:',
         width = .055,
         align = 'CENTER',
         fill = function(cell, record)
@@ -122,7 +122,7 @@ M.search_columns = {
         end,
     },
     {
-        title = 'Time\nLeft',
+        title = 'Time\nLeft:',
         width = .04,
         align = 'CENTER',
         fill = function(cell, record)
@@ -133,7 +133,7 @@ M.search_columns = {
         end,
     },
     {
-        title = 'Seller',
+        title = 'Seller:',
         width = .13,
         align = 'CENTER',
         fill = function(cell, record)
@@ -152,7 +152,7 @@ M.search_columns = {
         end,
     },
     {
-        title = {'Auction Bid\n(per item)', 'Auction Bid\n(per stack)'},
+        title = {'Auction Bid\n(per item):', 'Auction Bid\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -200,7 +200,7 @@ M.search_columns = {
         end,
     },
     {
-        title = {'Auction Buyout\n(per item)', 'Auction Buyout\n(per stack)'},
+        title = {'Auction Buyout\n(per item):', 'Auction Buyout\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -218,7 +218,7 @@ M.search_columns = {
         end,
     },
     {
-        title = '% Hist.\nValue',
+        title = 'Historical\nValue (%):',
         width = .08,
         align = 'CENTER',
         fill = function(cell, record)
@@ -235,7 +235,7 @@ M.search_columns = {
 
 M.auctions_columns = {
     {
-        title = 'Item',
+        title = 'Item:',
         width = .35,
         init = item_column_init,
         fill = item_column_fill,
@@ -244,7 +244,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = 'Lvl',
+        title = 'Lvl:',
         width = .035,
         align = 'CENTER',
         fill = function(cell, record)
@@ -257,7 +257,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = 'Auctions',
+        title = 'Auctions:',
         width = .06,
         align = 'CENTER',
         fill = function(cell, record, count, own, expandable)
@@ -278,7 +278,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = 'Stack\nSize',
+        title = 'Stack\nSize:',
         width = .055,
         align = 'CENTER',
         fill = function(cell, record)
@@ -289,7 +289,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = 'Time\nLeft',
+        title = 'Time\nLeft:',
         width = .04,
         align = 'CENTER',
         fill = function(cell, record)
@@ -300,7 +300,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = {'Auction Bid\n(per item)', 'Auction Bid\n(per stack)'},
+        title = {'Auction Bid\n(per item):', 'Auction Bid\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -330,7 +330,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = {'Auction Buyout\n(per item)', 'Auction Buyout\n(per stack)'},
+        title = {'Auction Buyout\n(per item):', 'Auction Buyout\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -348,7 +348,7 @@ M.auctions_columns = {
         end,
     },
     {
-        title = 'High Bidder',
+        title = 'High Bidder:',
         width = .21,
         align = 'CENTER',
         fill = function(cell, record)
@@ -370,7 +370,7 @@ M.auctions_columns = {
 
 M.bids_columns = {
     {
-        title = 'Item',
+        title = 'Item:',
         width = .35,
         init = item_column_init,
         fill = item_column_fill,
@@ -379,7 +379,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = 'Auctions',
+        title = 'Auctions:',
         width = .06,
         align = 'CENTER',
         fill = function(cell, record, count, own, expandable)
@@ -400,7 +400,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = 'Stack\nSize',
+        title = 'Stack\nSize:',
         width = .055,
         align = 'CENTER',
         fill = function(cell, record)
@@ -411,7 +411,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = 'Time\nLeft',
+        title = 'Time\nLeft:',
         width = .04,
         align = 'CENTER',
         fill = function(cell, record)
@@ -422,7 +422,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = 'Seller',
+        title = 'Seller:',
         width = .13,
         align = 'CENTER',
         fill = function(cell, record)
@@ -441,7 +441,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = {'Auction Bid\n(per item)', 'Auction Bid\n(per stack)'},
+        title = {'Auction Bid\n(per item):', 'Auction Bid\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -471,7 +471,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = {'Auction Buyout\n(per item)', 'Auction Buyout\n(per stack)'},
+        title = {'Auction Buyout\n(per item):', 'Auction Buyout\n(per stack):'},
         width = .125,
         align = 'RIGHT',
         isPrice = true,
@@ -489,7 +489,7 @@ M.bids_columns = {
         end,
     },
     {
-        title = 'Status',
+        title = 'Status:',
         width = .115,
         align = 'CENTER',
         fill = function(cell, record)
@@ -993,8 +993,9 @@ function M.new(parent, rows, columns)
 	        row:SetPoint('TOPRIGHT', 0, -(HEAD_HEIGHT + HEAD_SPACE + (i - 1) * rt.ROW_HEIGHT))
         end
         local highlight = row:CreateTexture()
-        highlight:SetAllPoints()
-        highlight:SetTexture(1, .9, 0, .5)
+        highlight:SetPoint("TOPLEFT", 3, 0)
+        highlight:SetPoint("BOTTOMRIGHT", -3, 0)
+        highlight:SetTexture(1, .9, 0, .4)
         highlight:Hide()
         row.highlight = highlight
 

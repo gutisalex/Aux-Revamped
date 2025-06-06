@@ -290,17 +290,17 @@ do
     editbox.change = update_form
     editbox.enter = function() editbox:ClearFocus() end
     local label = gui.label(editbox, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', -2, 1)
-    label:SetText('Name')
+    label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', 2, 0)
+    label:SetText('Name:')
     name_input = editbox
 end
 do
     local checkbox = gui.checkbox(frame.filter)
-    checkbox:SetPoint('TOPLEFT', name_input, 'TOPRIGHT', 16, 0)
+    checkbox:SetPoint('TOPLEFT', name_input, 'TOPRIGHT', 36, -5)
     checkbox:SetScript('OnClick', update_form)
     local label = gui.label(checkbox, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', checkbox, 'TOPLEFT', -2, 1)
-    label:SetText('Exact')
+    label:SetPoint('BOTTOMLEFT', checkbox, 'TOPLEFT', -34, -14)
+    label:SetText('Exact:')
     exact_checkbox = checkbox
 end
 do
@@ -325,8 +325,8 @@ do
 	    update_form()
     end
     local label = gui.label(editbox, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', -2, 1)
-    label:SetText('Level Range')
+    label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', 2, 0)
+    label:SetText('Level Range:')
     min_level_input = editbox
 end
 do
@@ -357,11 +357,11 @@ do
 end
 do
     local checkbox = gui.checkbox(frame.filter)
-    checkbox:SetPoint('TOPLEFT', max_level_input, 'TOPRIGHT', 16, 0)
+    checkbox:SetPoint('TOPLEFT', max_level_input, 'TOPRIGHT', 42, -5)
     checkbox:SetScript('OnClick', update_form)
     local label = gui.label(checkbox, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', checkbox, 'TOPLEFT', -2, 1)
-    label:SetText('Usable')
+    label:SetPoint('BOTTOMLEFT', checkbox, 'TOPLEFT', -40, -14)
+    label:SetText('Usable:')
     usable_checkbox = checkbox
 end
 do
@@ -370,8 +370,8 @@ do
     dropdown:SetPoint('TOPLEFT', min_level_input, 'BOTTOMLEFT', 0, 5 - FILTER_SPACING)
     dropdown:SetWidth(300)
     local label = gui.label(dropdown, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
-    label:SetText('Item Class')
+    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', 2, 0)
+    label:SetText('Item Class:')
     UIDropDownMenu_Initialize(dropdown, initialize_class_dropdown)
     dropdown:SetScript('OnShow', function()
         UIDropDownMenu_Initialize(this, initialize_class_dropdown)
@@ -383,8 +383,8 @@ do
     dropdown:SetPoint('TOPLEFT', class_dropdown, 'BOTTOMLEFT', 0, 10 - FILTER_SPACING)
     dropdown:SetWidth(300)
     local label = gui.label(dropdown, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
-    label:SetText('Item Subclass')
+    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', 2, 0)
+    label:SetText('Item Subclass:')
     UIDropDownMenu_Initialize(dropdown, initialize_subclass_dropdown)
     dropdown:SetScript('OnShow', function()
         UIDropDownMenu_Initialize(this, initialize_subclass_dropdown)
@@ -396,8 +396,8 @@ do
     dropdown:SetPoint('TOPLEFT', subclass_dropdown, 'BOTTOMLEFT', 0, 10 - FILTER_SPACING)
     dropdown:SetWidth(300)
     local label = gui.label(dropdown, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
-    label:SetText('Item Slot')
+    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', 2, 0)
+    label:SetText('Item Slot:')
     UIDropDownMenu_Initialize(dropdown, initialize_slot_dropdown)
     dropdown:SetScript('OnShow', function()
         UIDropDownMenu_Initialize(this, initialize_slot_dropdown)
@@ -409,8 +409,8 @@ do
     dropdown:SetPoint('TOPLEFT', slot_dropdown, 'BOTTOMLEFT', 0, 10 - FILTER_SPACING)
     dropdown:SetWidth(300)
     local label = gui.label(dropdown, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
-    label:SetText('Min Quality')
+    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', 2, 0)
+    label:SetText('Min Quality:')
     UIDropDownMenu_Initialize(dropdown, initialize_quality_dropdown)
     dropdown:SetScript('OnShow', function()
         UIDropDownMenu_Initialize(this, initialize_quality_dropdown)
@@ -427,8 +427,8 @@ do
     end)
     _G[dropdown:GetName() .. 'Text']:Hide()
     local label = gui.label(dropdown, gui.font_size.medium)
-    label:SetPoint('RIGHT', dropdown, 'LEFT', -15, 0)
-    label:SetText('Component')
+    label:SetPoint('RIGHT', dropdown, 'LEFT', -5, 0)
+    label:SetText('Component:')
     filter_dropdown = dropdown
 end
 do
@@ -548,10 +548,10 @@ for _ = 1, 5 do
 end
 
 favorite_searches_listing = listing.new(frame.saved.favorite)
-favorite_searches_listing:SetColInfo{{name='Auto', width=.07, align='CENTER'}, {name='Favorite Searches', width=.93}}
+favorite_searches_listing:SetColInfo{{name='Auto:', width=.07, align='CENTER'}, {name='Favorite Searches:', width=.80}}
 
 recent_searches_listing = listing.new(frame.saved.recent)
-recent_searches_listing:SetColInfo{{name='Recent Searches', width=1}}
+recent_searches_listing:SetColInfo{{name='Recent Searches:', width=1}}
 
 for listing in T.temp-T.set(favorite_searches_listing, recent_searches_listing) do
 	for k, v in handlers do

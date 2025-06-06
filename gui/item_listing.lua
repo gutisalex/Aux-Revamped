@@ -59,8 +59,8 @@ function M.new(parent, on_click, selected)
 
 	local scroll_bar = _G[scroll_frame:GetName() .. 'ScrollBar']
 	scroll_bar:ClearAllPoints()
-	scroll_bar:SetPoint('TOPRIGHT', parent, -4, 2)
-	scroll_bar:SetPoint('BOTTOMRIGHT', parent, -4, 4)
+	scroll_bar:SetPoint('TOPRIGHT', parent, -3, 2)
+	scroll_bar:SetPoint('BOTTOMRIGHT', parent, -3, 4)
 	scroll_bar:SetWidth(10)
 	local thumbTex = scroll_bar:GetThumbTexture()
 	thumbTex:SetPoint('CENTER', 0, 0)
@@ -102,9 +102,10 @@ function M.new(parent, on_click, selected)
 		row.item.button:SetScript('OnLeave', function() GameTooltip:Hide() end)
 
 		local highlight = row:CreateTexture()
-		highlight:SetAllPoints(row)
+         highlight:SetPoint("TOPLEFT", -1.5, 0)
+        highlight:SetPoint("BOTTOMRIGHT", 12, 0)
 		highlight:Hide()
-		highlight:SetTexture(1, .9, 0, .4)
+		highlight:SetTexture(1, .9, 0, .2)
 		row.highlight = highlight
 
 		rows[row_index] = row

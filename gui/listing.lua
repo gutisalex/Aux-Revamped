@@ -228,7 +228,8 @@ local methods = {
             row:SetPoint('TOPRIGHT', 0, -(self.headHeight + HEAD_SPACE + (rowNum - 1) * ROW_HEIGHT))
         end
         local highlight = row:CreateTexture()
-        highlight:SetAllPoints()
+        highlight:SetPoint("TOPLEFT", -2, 0)
+        highlight:SetPoint("BOTTOMRIGHT", -3, 0)
         highlight:SetTexture(1, .9, 0, .2)
         highlight:Hide()
         row.highlight = highlight

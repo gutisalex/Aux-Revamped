@@ -182,7 +182,7 @@ do
     end)
     slider.editbox:SetNumeric(true)
     slider.editbox:SetMaxLetters(3)
-    slider.label:SetText('Stack Size')
+    slider.label:SetText('Stack Size:')
     stack_size_slider = slider
 end
 do
@@ -205,16 +205,16 @@ do
         end
     end)
     slider.editbox:SetNumeric(true)
-    slider.label:SetText('Stack Count')
+    slider.label:SetText('Stack Count:')
     stack_count_slider = slider
 end
 do
     local dropdown = gui.dropdown(frame.parameters)
-    dropdown:SetPoint('TOPLEFT', stack_count_slider, 'BOTTOMLEFT', 0, -22)
-    dropdown:SetWidth(90)
+    dropdown:SetPoint('TOPLEFT', stack_count_slider, 'BOTTOMLEFT', -3, -22)
+    dropdown:SetWidth(82)
     local label = gui.label(dropdown, gui.font_size.small)
-    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', -2, -3)
-    label:SetText('Duration')
+    label:SetPoint('BOTTOMLEFT', dropdown, 'TOPLEFT', 2, 1)
+    label:SetText('Duration:')
     UIDropDownMenu_Initialize(dropdown, initialize_duration_dropdown)
     dropdown:SetScript('OnShow', function()
         UIDropDownMenu_Initialize(this, initialize_duration_dropdown)
@@ -240,7 +240,7 @@ do
     editbox:SetPoint('TOPRIGHT', -71, -60)
     editbox:SetWidth(180)
     editbox:SetHeight(22)
-    editbox:SetAlignment('RIGHT')
+    editbox:SetAlignment('CENTER')
     editbox:SetFontSize(17)
     editbox:SetScript('OnTabPressed', function()
 	    if IsShiftKeyDown() then
@@ -258,8 +258,8 @@ do
     end
     do
         local label = gui.label(editbox, gui.font_size.small)
-        label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', -2, 1)
-        label:SetText('Unit Starting Price')
+        label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', 2, 1)
+        label:SetText('Unit Starting Price:')
     end
     do
         local label = gui.label(editbox, 14)
@@ -275,7 +275,7 @@ do
     editbox:SetPoint('TOPRIGHT', unit_start_price_input, 'BOTTOMRIGHT', 0, -19)
     editbox:SetWidth(180)
     editbox:SetHeight(22)
-    editbox:SetAlignment('RIGHT')
+    editbox:SetAlignment('CENTER')
     editbox:SetFontSize(17)
     editbox:SetScript('OnTabPressed', function()
         if IsShiftKeyDown() then
@@ -293,8 +293,8 @@ do
     end
     do
         local label = gui.label(editbox, gui.font_size.small)
-        label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', -2, 1)
-        label:SetText('Unit Buyout Price')
+        label:SetPoint('BOTTOMLEFT', editbox, 'TOPLEFT', 2, 1)
+        label:SetText('Unit Buyout Price:')
     end
     do
         local label = gui.label(editbox, 14)
@@ -316,11 +316,11 @@ function aux.handle.LOAD()
 		frame.bid_listing:Hide()
 		frame.buyout_listing:SetPoint('BOTTOMLEFT', frame.inventory, 'BOTTOMRIGHT', 2.5, 0)
 		buyout_listing:SetColInfo{
-			{name='Auctions', width=.15, align='CENTER'},
-			{name='Time Left', width=.15, align='CENTER'},
-			{name='Stack Size', width=.15, align='CENTER'},
-			{name='Auction Buyout (per item)', width=.4, align='RIGHT'},
-			{name='% Hist. Value', width=.15, align='CENTER'},
+			{name='Auctions:', width=.15, align='CENTER'},
+			{name='Time Left:', width=.15, align='CENTER'},
+			{name='Stack Size:', width=.15, align='CENTER'},
+			{name='Auction Buyout (per item):', width=.3, align='RIGHT'},
+			{name='Historical Value (%):', width=.18, align='CENTER'},
 		}
 	end
 end
