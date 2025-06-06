@@ -54,7 +54,7 @@ gui.horizontal_line(frame.inventory, -45)
 
 do
 	local f = CreateFrame('Frame', nil, frame.inventory)
-	f:SetPoint('TOPLEFT', 0, -51)
+	f:SetPoint('TOPLEFT', 5, -49)
 	f:SetPoint('BOTTOMRIGHT', 0, 0)
 	inventory_listing = item_listing.new(
 		f,

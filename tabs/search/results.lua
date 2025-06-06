@@ -300,6 +300,7 @@ function M.execute(resume, real_time)
 
 	if resume then
 		search_box:SetText(current_search().filter_string)
+		search_box:SetTextInsets(5, 1.5, 3, 3)  -- reapply insets here
 	end
 	local filter_string, first_page, last_page = search_box:GetText(), blizzard_page_index(first_page_input:GetText()), blizzard_page_index(last_page_input:GetText())
 

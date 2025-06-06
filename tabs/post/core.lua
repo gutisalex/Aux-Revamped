@@ -457,7 +457,6 @@ function update_item(item)
 
     unit_start_price_input:SetText(money.to_string(settings.start_price, true, nil, nil, true))
     unit_buyout_price_input:SetText(money.to_string(settings.buyout_price, true, nil, nil, true))
-
     if not bid_records[selected_item.key] then
         refresh_entries()
     end

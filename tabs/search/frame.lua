@@ -53,6 +53,7 @@ do
     btn:SetScript('OnClick', next_search)
     next_button = btn
 end
+-- RANGE BOX
 do
 	local btn = gui.button(frame, gui.font_size.small)
 	btn:SetHeight(25)

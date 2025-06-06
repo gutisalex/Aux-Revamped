@@ -112,11 +112,25 @@ function M.set_size(frame, width, height)
 	frame:SetHeight(height or width)
 end
 
+
+-- FRAME SETTINGS
 function M.set_frame_style(frame, backdrop_color, border_color, left, right, top, bottom)
-	frame:SetBackdrop{bgFile=[[Interface\Buttons\WHITE8X8]], edgeFile=[[Interface\Buttons\WHITE8X8]], edgeSize=1.5, tile=true, insets={left=left, right=right, top=top, bottom=bottom}}
-	frame:SetBackdropColor(backdrop_color())
-	frame:SetBackdropBorderColor(border_color())
+	frame:SetBackdrop({
+		bgFile = [[Interface\Tooltips\UI-Tooltip-Background]],
+		edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]],
+		edgeSize = 11,
+		tile = true,
+		insets = { left = 3, right = 3, top = 3, bottom = 3 }
+	})
+
+	local br, bg, bb, ba = backdrop_color()
+	frame:SetBackdropColor(0.1, 0.1, 0.1, 0.8)
+
+	local er, eg, eb, ea = border_color()
+	frame:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)
 end
+-- END OF FRAME SETTINGS
+
 
 function M.set_window_style(frame, left, right, top, bottom)
     set_frame_style(frame, aux.color.window.background, aux.color.window.border, left, right, top, bottom)
@@ -162,7 +176,11 @@ function M.button(parent, text_height)
     set_content_style(button)
     local highlight = button:CreateTexture(nil, 'HIGHLIGHT')
     highlight:SetAllPoints()
-    highlight:SetTexture(1, 1, 1, .2)
+    highlight:SetTexture(1, 1, 1, 0.1)
+    highlight:ClearAllPoints()
+	highlight:ClearAllPoints()
+	highlight:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -3)
+	highlight:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", -2, 3)
     button.highlight = highlight
     do
         local label = button:CreateFontString()
@@ -208,11 +226,11 @@ do
 			dock:SetPoint('TOPLEFT', 1, 1)
 			dock:SetPoint('TOPRIGHT', -1, 1)
 		end
-		dock:SetTexture(aux.color.panel.background())
+		-- dock:SetTexture(aux.color.panel.background())
 		tab.dock = dock
 		local highlight = tab:CreateTexture(nil, 'HIGHLIGHT')
 		highlight:SetAllPoints()
-		highlight:SetTexture(1, 1, 1, .2)
+		highlight:SetTexture(0, 0, 0, 0)
 		tab.highlight = highlight
 
 		tab.text = tab:CreateFontString()
@@ -245,7 +263,7 @@ do
 			end
 		end
 
-		tab:SetWidth(tab:GetFontString():GetStringWidth() + 14)
+		tab:SetWidth(tab:GetFontString():GetStringWidth() + 30)
 
 		tinsert(self._tabs, tab)
 	end
@@ -261,7 +279,7 @@ do
 				tab:Disable()
 				tab:SetBackdropColor(aux.color.panel.background())
 				tab.dock:Show()
-				tab:SetHeight(29)
+				tab:SetHeight(24)
 			else
 				tab.text:SetTextColor(aux.color.text.enabled())
 				tab:Enable()
@@ -284,7 +302,7 @@ end
 function M.editbox(parent)
     local editbox = CreateFrame('EditBox', nil, parent)
     editbox:SetAutoFocus(false)
-    editbox:SetTextInsets(1.5, 1.5, 3, 3)
+    editbox:SetTextInsets(5, 1.5, 3, 3)
     editbox:SetMaxLetters(nil)
     editbox:SetHeight(24)
     editbox:SetTextColor(0, 0, 0, 0)
@@ -349,7 +367,7 @@ function M.editbox(parent)
 	    self.overlay:SetFont(font, size)
     end
     local overlay = label(editbox)
-    overlay:SetPoint('LEFT', 1.5, 0)
+    overlay:SetPoint('LEFT', 5, 0)
     overlay:SetPoint('RIGHT', -1.5, 0)
     overlay:SetTextColor(aux.color.text.enabled())
     editbox.overlay = overlay
@@ -376,7 +394,7 @@ do
 	        status_bar:SetMinMaxValues(0, 1)
 	        status_bar:SetAllPoints()
 	        status_bar:SetStatusBarTexture([[Interface\Buttons\WHITE8X8]])
-	        status_bar:SetStatusBarColor(.42, .42, .42, .7)
+	        status_bar:SetStatusBarColor(.42, .42, .42, 0)
 	        status_bar:SetFrameLevel(level + 2)
 	        status_bar:SetScript('OnUpdate', update_bar)
 	        self.secondary_status_bar = status_bar
@@ -387,7 +405,7 @@ do
 	        status_bar:SetMinMaxValues(0, 1)
 	        status_bar:SetAllPoints()
 	        status_bar:SetStatusBarTexture([[Interface\Buttons\WHITE8X8]])
-	        status_bar:SetStatusBarColor(.19, .22, .33, .9)
+	        status_bar:SetStatusBarColor(.19, .22, .33, 0)
 	        status_bar:SetFrameLevel(level + 3)
 	        status_bar:SetScript('OnUpdate', update_bar)
 	        self.primary_status_bar = status_bar
@@ -446,7 +464,7 @@ function M.horizontal_line(parent, y_offset, inverted_color)
     local texture = parent:CreateTexture()
     texture:SetPoint('TOPLEFT', parent, 'TOPLEFT', 2, y_offset)
     texture:SetPoint('TOPRIGHT', parent, 'TOPRIGHT', -2, y_offset)
-    texture:SetHeight(2)
+    texture:SetHeight(-1)
     if inverted_color then
         texture:SetTexture(aux.color.panel.background())
     else

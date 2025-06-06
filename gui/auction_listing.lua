@@ -23,7 +23,7 @@ local TIME_LEFT_STRINGS = {
 
 function item_column_init(rt, cell)
     local spacer = CreateFrame('Frame', nil, cell)
-    spacer:SetPoint('TOPLEFT', 0, 0)
+    spacer:SetPoint('TOPLEFT', 2, 0)
     spacer:SetHeight(rt.ROW_HEIGHT)
     spacer:SetWidth(1)
     cell.spacer = spacer
@@ -698,7 +698,7 @@ local methods = {
             local tex = cell:GetNormalTexture()
             tex:SetTexture[[Interface\AddOns\aux-AddOn\WorldStateFinalScore-Highlight]]
             tex:SetTexCoord(.017, 1, .083, .909)
-            tex:SetAlpha(.5)
+            tex:SetAlpha(0)
         end
 
         if getn(self.sorts) > 0 then
@@ -962,14 +962,14 @@ function M.new(parent, rows, columns)
         tex:SetAllPoints()
         tex:SetTexture([[Interface\AddOns\aux-AddOn\WorldStateFinalScore-Highlight]])
         tex:SetTexCoord(.017, 1, .083, .909)
-        tex:SetAlpha(.5)
+        tex:SetAlpha(0)
         cell:SetNormalTexture(tex)
 
         local tex = cell:CreateTexture()
         tex:SetAllPoints()
         tex:SetTexture([[Interface\Buttons\UI-Listbox-Highlight]])
         tex:SetTexCoord(.025, .957, .087, .931)
-        tex:SetAlpha(.2)
+        tex:SetAlpha(0)
         cell:SetHighlightTexture(tex)
 
         tinsert(rt.headCells, cell)

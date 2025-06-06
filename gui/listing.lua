@@ -180,7 +180,7 @@ local methods = {
 	    tex:SetAllPoints()
 	    tex:SetTexture([[Interface\AddOns\aux-AddOn\WorldStateFinalScore-Highlight]])
 	    tex:SetTexCoord(.017, 1, .083, .909)
-	    tex:SetAlpha(.5)
+	    tex:SetAlpha(0)
 
         tinsert(self.headCols, col)
         
@@ -229,7 +229,7 @@ local methods = {
         end
         local highlight = row:CreateTexture()
         highlight:SetAllPoints()
-        highlight:SetTexture(1, .9, 0, .4)
+        highlight:SetTexture(1, .9, 0, .2)
         highlight:Hide()
         row.highlight = highlight
         row.st = self
@@ -263,7 +263,7 @@ function M.new(parent)
     st.numRows = max(floor((parent:GetHeight() - HEAD_HEIGHT - HEAD_SPACE) / ROW_HEIGHT), 0)
 
     local contentFrame = CreateFrame('Frame', nil, st)
-    contentFrame:SetPoint('TOPLEFT', 0, 0)
+    contentFrame:SetPoint('TOPLEFT', 5, 1)
     contentFrame:SetPoint('BOTTOMRIGHT', 0, 0)
     st.contentFrame = contentFrame
 
