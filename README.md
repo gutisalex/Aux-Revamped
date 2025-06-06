@@ -1,10 +1,11 @@
 # Aux-Revamped
 
-
-
-
 * A refreshed and transparent UI update for the classic Aux auction addon.
+<img width="930" alt="20250606_123747" src="https://github.com/user-attachments/assets/1ec1f030-1cef-4e78-94f4-8300f8739d26" />
+<img width="930" alt="20250606_123812" src="https://github.com/user-attachments/assets/28dce4fc-214e-46d6-87c0-90fd83d9e8c0" />
 
+
+  
 # aux Turtle
 
 * Shares some price data through the LFT chat when searching the AH, use **/aux sharing** to disable sending and receiving data.
