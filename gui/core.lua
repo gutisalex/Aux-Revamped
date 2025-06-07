@@ -124,7 +124,7 @@ function M.set_frame_style(frame, backdrop_color, border_color, left, right, top
 	})
 
 	local br, bg, bb, ba = backdrop_color()
-	frame:SetBackdropColor(0.1, 0.1, 0.1, 0.8)
+	frame:SetBackdropColor(0.2, 0.2, 0.2, 1)
 
 	local er, eg, eb, ea = border_color()
 	frame:SetBackdropBorderColor(0.4, 0.4, 0.4, 1)

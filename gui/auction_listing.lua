@@ -995,7 +995,7 @@ function M.new(parent, rows, columns)
         local highlight = row:CreateTexture()
         highlight:SetPoint("TOPLEFT", 3, 0)
         highlight:SetPoint("BOTTOMRIGHT", -3, 0)
-        highlight:SetTexture(1, .9, 0, .4)
+        highlight:SetTexture(1, .9, 0, .2)
         highlight:Hide()
         row.highlight = highlight
 
@@ -1021,8 +1021,9 @@ function M.new(parent, rows, columns)
 
             if mod(j, 2) == 1 then
                 local tex = cell:CreateTexture()
-                tex:SetAllPoints()
-                tex:SetTexture(.3, .3, .3, .2)
+                tex:SetPoint("TOPLEFT", 3, 0)
+                tex:SetPoint("BOTTOMRIGHT", -3, 0)
+                tex:SetTexture(.3, .3, .3, .0)
             end
 
             if column.init then
@@ -1034,8 +1035,9 @@ function M.new(parent, rows, columns)
 
         if mod(i, 2) == 0 then
             local tex = row:CreateTexture()
-            tex:SetAllPoints()
-            tex:SetTexture(.3, .3, .3, .3)
+            tex:SetPoint("TOPLEFT", 3, 0)
+            tex:SetPoint("BOTTOMRIGHT", -3, 0)
+            tex:SetTexture(.3, .3, .3, .0)
         end
 
         tinsert(rt.rows, row)
