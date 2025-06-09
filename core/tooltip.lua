@@ -93,7 +93,7 @@ function M.extend_tooltip(tooltip, link, quantity)
     local value = history.value(item_key)
     if auctionable then
         if settings.value then
-            tooltip:AddLine('Value: ' .. (value and money.to_string(value * quantity) or UNKNOWN), {r=1, g=1, b=1})
+            tooltip:AddLine('|cFFFFFFFFValue:|r ' .. (value and money.to_string(value * quantity) or UNKNOWN), {r=1, g=1, b=1})
         end
         if settings.daily then
             local market_value = history.market_value(item_key)
