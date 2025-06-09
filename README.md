@@ -16,11 +16,14 @@ I absolutely love Aux, but I’ve always thought the UI could use some polish �
 
 I’ve updated it to use Blizzard’s classic background and border, refined all the highlight textures, and tweaked the text positioning for a cleaner, more cohesive look.
 
-Additionally, I’ve improved the “money” fonts so that the numbers now match the color of their corresponding currency symbols, making values easier to read at a glance. I also added dynamic vendor price and stack price calculations that include profit and loss info right in the post.
+Additionally, I’ve improved the “money” fonts so the numbers now match the color of their respective currency symbols, making values easier to read at a glance. I also added dynamic vendor price and stacks price calculations, including profit/loss display directly in the posting tab.
+
+On top of that, I implemented a built-in 40% reduction to deposit fees. It’s not a perfect match to the original Turtle WoW formula, but it’s a lot closer than the default values.
 
 It’s not perfect yet, but it’s a solid step forward!
 
 As always, feel free to share any ideas or submit pull requests. :)
+
 
   
 # aux Turtle
