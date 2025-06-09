@@ -1,14 +1,26 @@
 # Aux-Revamped
 
 * A refreshed and transparent UI update for the classic Aux auction addon.
-![image](https://github.com/user-attachments/assets/2b73c4fd-29fb-4d98-822d-3bba2052dad8)
+![image](https://github.com/user-attachments/assets/5657e872-3cd3-437a-874a-b3e2732f06f4)
 
-![image](https://github.com/user-attachments/assets/8e2e9617-b509-4523-85f6-aebc05b67f29)
+
+![image](https://github.com/user-attachments/assets/86cf212b-675f-4008-bd04-c23ec041f138)
+
 
 ![image](https://github.com/user-attachments/assets/64300e05-27b8-466f-84cc-965be9a7cc7b)
 
 
-Feel free to pull request or let me know if you have any ideas for improvements.
+Hey everyone,
+
+I absolutely love Aux, but I’ve always thought the UI could use some polish — and I know many of you agree. So, I took some time to give it a facelift!
+
+I’ve updated it to use Blizzard’s classic background and border, refined all the highlight textures, and tweaked the text positioning for a cleaner, more cohesive look.
+
+Additionally, I’ve improved the “money” fonts so that the numbers now match the color of their corresponding currency symbols, making values easier to read at a glance. I also added dynamic vendor price and stack price calculations that include profit and loss info right in the post.
+
+It’s not perfect yet, but it’s a solid step forward!
+
+As always, feel free to share any ideas or submit pull requests. :)
 
   
 # aux Turtle
