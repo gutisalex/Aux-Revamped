@@ -307,8 +307,26 @@ do
 end
 do
 	local label = gui.label(frame.parameters, gui.font_size.medium)
-	label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 0, -24)
+	label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', -50, -290)
 	deposit = label
+end
+
+do
+    local label = gui.label(frame.parameters, gui.font_size.medium)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', -200, -24)
+    vendor_price_label = label
+end
+
+do
+    local label = gui.label(frame.parameters, gui.font_size.medium)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 100, 0)
+    final_stack_price = label
+end
+
+do
+    local label = gui.label(frame.parameters, gui.font_size.medium)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 101, -24)
+    profit_loss = label
 end
 
 function aux.handle.LOAD()

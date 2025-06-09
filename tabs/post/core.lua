@@ -336,6 +336,7 @@ function update_item_configuration()
         deposit:Hide()
         duration_dropdown:Hide()
         hide_checkbox:Hide()
+        vendor_price_label:Hide()
     else
 		unit_start_price_input:Show()
         unit_buyout_price_input:Show()
@@ -344,6 +345,7 @@ function update_item_configuration()
         deposit:Show()
         duration_dropdown:Show()
         hide_checkbox:Show()
+        vendor_price_label:Show()
 
         item.texture:SetTexture(selected_item.texture)
         item.name:SetText('[' .. selected_item.name .. ']')
@@ -360,13 +362,68 @@ function update_item_configuration()
         stack_size_slider.editbox:SetNumber(stack_size_slider:GetValue())
         stack_count_slider.editbox:SetNumber(stack_count_slider:GetValue())
 
-        do
-            local deposit_factor = UnitFactionGroup'npc' and .05 or .25
-            local duration_factor = UIDropDownMenu_GetSelectedValue(duration_dropdown) / 120
-            local stack_size, stack_count = selected_item.max_charges and 1 or stack_size_slider:GetValue(), stack_count_slider:GetValue()
-            local amount = floor(selected_item.unit_vendor_price * deposit_factor * stack_size) * stack_count * duration_factor
-            deposit:SetText('Deposit: ' .. money.to_string(amount, nil, nil, aux.color.text.enabled))
+do
+    local deposit_factor = UnitFactionGroup'npc' and 0.05 or 0.25
+    local duration_factor = UIDropDownMenu_GetSelectedValue(duration_dropdown) / 120
+    local stack_size, stack_count = selected_item.max_charges and 1 or stack_size_slider:GetValue(), stack_count_slider:GetValue()
+    local base_amount = floor(selected_item.unit_vendor_price * deposit_factor * stack_size) * stack_count * duration_factor
+    local amount = floor(base_amount * 0.6)  -- apply 40% reduction
+    deposit:SetText('Deposit: ' .. money.to_string(amount, nil, nil, aux.color.text.enabled))
+end
+
+
+-- Calculate vendor price
+do
+    local id = selected_item.item_id
+    local unit_price = aux.account_data.merchant_sell[id]
+    local stack_count = stack_count_slider:GetValue()
+    local stack_size = stack_size_slider:GetValue()
+    local price = unit_price and unit_price * stack_count * stack_size or nil
+	local formatted_price = price and money.to_string(price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No sell price")
+    vendor_price_label:SetText("Vendor Price: " .. formatted_price)
+end
+
+do
+    local stack_count = stack_count_slider:GetValue()
+    local stack_size = stack_size_slider:GetValue()
+    local unit_buyout_price = get_unit_buyout_price()
+    local price = unit_buyout_price and stack_size * stack_count * unit_buyout_price or nil
+
+    local formatted_price = price and money.to_string(price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No buyout")
+
+    final_stack_price:SetText("Stack Price: " .. formatted_price)
+end
+-- Calculate profit or loss (after 5% AH cut)
+do
+    local id = selected_item.item_id
+    local unit_vendor_price = aux.account_data.merchant_sell[id]
+    local stack_count = stack_count_slider:GetValue()
+    local stack_size = stack_size_slider:GetValue()
+    local unit_buyout_price = get_unit_buyout_price()
+
+    local vendor_price = unit_vendor_price and unit_vendor_price * stack_count * stack_size or nil
+    local stack_price = unit_buyout_price and unit_buyout_price * stack_count * stack_size or nil
+
+    -- Apply 5% auction house cut
+    local net_stack_price = stack_price and floor(stack_price * 0.95 + 0.5) or nil  -- round to nearest copper
+
+    local diff = (vendor_price and net_stack_price) and (net_stack_price - vendor_price) or nil
+    local label, formatted = aux.color.text.enabled("No data"), ""
+
+    if diff then
+        local color_fn = aux.color.text.enabled
+        if net_stack_price > vendor_price then
+            label = "|cff00ff00Profit|r = "  -- green
+        else
+            label = "|cffff0000Loss|r = "    -- red
+            diff = math.abs(diff)
         end
+        formatted = money.to_string(diff, nil, nil, color_fn)
+    end
+
+    profit_loss:SetText(label .. formatted)
+end
+
 
         refresh_button:Enable()
 	end
