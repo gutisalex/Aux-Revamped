@@ -395,7 +395,7 @@ do
 
     local formatted_price = price and money.to_string(price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No buyout")
 
-    final_stack_price:SetText("Stack Price: " .. formatted_price)
+    final_stack_price:SetText("Stacks Price: " .. formatted_price)
 end
 -- Calculate profit or loss (after 5% AH cut)
 do
