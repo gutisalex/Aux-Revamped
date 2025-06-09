@@ -1,9 +1,11 @@
 # Aux-Revamped
 
 * A refreshed and transparent UI update for the classic Aux auction addon.
-<img width="930" alt="20250606_123747" src="https://github.com/user-attachments/assets/1ec1f030-1cef-4e78-94f4-8300f8739d26" />
-<img width="930" alt="20250606_123812" src="https://github.com/user-attachments/assets/28dce4fc-214e-46d6-87c0-90fd83d9e8c0" />
+![image](https://github.com/user-attachments/assets/2b73c4fd-29fb-4d98-822d-3bba2052dad8)
 
+![image](https://github.com/user-attachments/assets/8e2e9617-b509-4523-85f6-aebc05b67f29)
+
+Feel free to pull request or let me know if you have any ideas for improvements.
 
   
 # aux Turtle
