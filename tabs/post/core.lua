@@ -382,21 +382,46 @@ do
     local unit_price = aux.account_data.merchant_sell[id]
     local stack_count = stack_count_slider:GetValue()
     local stack_size = stack_size_slider:GetValue()
-    local price = unit_price and unit_price * stack_count * stack_size or nil
-	local formatted_price = price and money.to_string(price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No sell price")
-    vendor_price_label:SetText("Vendor Price: " .. formatted_price)
+
+    local total_items = stack_count * stack_size
+    local total_price = unit_price and unit_price * total_items or nil
+    local formatted_unit = unit_price and money.to_string(unit_price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("?")
+    local formatted_total = total_price and money.to_string(total_price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No sell price")
+
+    local text
+    if stack_size == 1 and stack_count == 1 then
+        text = formatted_unit
+    else
+        text = formatted_unit .. " / " .. formatted_total
+    end
+
+    vendor_price_label:SetText("Vendor Price: " .. text)
 end
+
+
 
 do
     local stack_count = stack_count_slider:GetValue()
     local stack_size = stack_size_slider:GetValue()
     local unit_buyout_price = get_unit_buyout_price()
-    local price = unit_buyout_price and stack_size * stack_count * unit_buyout_price or nil
 
-    local formatted_price = price and money.to_string(price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No buyout")
+    local stack_price = unit_buyout_price and stack_size * unit_buyout_price or nil
+    local total_price = stack_price and stack_price * stack_count or nil
 
-    final_stack_price:SetText("Stacks Price: " .. formatted_price)
+    local formatted_stack = stack_price and money.to_string(stack_price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("?")
+    local formatted_total = total_price and money.to_string(total_price, nil, nil, aux.color.text.enabled) or aux.color.text.enabled("No buyout")
+
+    local text
+    if stack_count == 1 then
+        text = "Final Price: " .. formatted_stack
+    else
+        text = "Final Price: " .. formatted_stack .. " / " .. formatted_total
+    end
+
+    final_stack_price:SetText(text)
 end
+
+
 -- Calculate profit or loss (after 5% AH cut)
 do
     local id = selected_item.item_id
@@ -405,28 +430,51 @@ do
     local stack_size = stack_size_slider:GetValue()
     local unit_buyout_price = get_unit_buyout_price()
 
-    local vendor_price = unit_vendor_price and unit_vendor_price * stack_count * stack_size or nil
-    local stack_price = unit_buyout_price and unit_buyout_price * stack_count * stack_size or nil
+    local total_units = stack_count * stack_size
+    local total_vendor_price = unit_vendor_price and unit_vendor_price * total_units or nil
+    local total_buyout_price = unit_buyout_price and unit_buyout_price * total_units or nil
 
-    -- Apply 5% auction house cut
-    local net_stack_price = stack_price and floor(stack_price * 0.95 + 0.5) or nil  -- round to nearest copper
+    -- 5% auction house cut
+    local net_unit_price = unit_buyout_price and floor(unit_buyout_price * 0.95 + 0.5) or nil
+    local net_total_price = total_buyout_price and floor(total_buyout_price * 0.95 + 0.5) or nil
 
-    local diff = (vendor_price and net_stack_price) and (net_stack_price - vendor_price) or nil
-    local label, formatted = aux.color.text.enabled("No data"), ""
+    local unit_diff = (net_unit_price and unit_vendor_price) and (net_unit_price - unit_vendor_price) or nil
+    local total_diff = (net_total_price and total_vendor_price) and (net_total_price - total_vendor_price) or nil
 
-    if diff then
-        local color_fn = aux.color.text.enabled
-        if net_stack_price > vendor_price then
-            label = "|cff00ff00Profit|r = "  -- green
+    local label, formatted_unit, formatted_total
+
+    if unit_diff and total_diff then
+        if total_diff > 0 then
+            label = "|cff00ff00Profit|r: "
+        elseif total_diff < 0 then
+            label = "|cffff0000Loss|r: "
+            unit_diff = math.abs(unit_diff)
+            total_diff = math.abs(total_diff)
         else
-            label = "|cffff0000Loss|r = "    -- red
-            diff = math.abs(diff)
+            label = aux.color.text.enabled("No profit or loss")
         end
-        formatted = money.to_string(diff, nil, nil, color_fn)
-    end
 
-    profit_loss:SetText(label .. formatted)
+        if total_diff ~= 0 then
+            local color_fn = aux.color.text.enabled
+            formatted_unit = money.to_string(unit_diff, nil, nil, color_fn)
+            formatted_total = money.to_string(total_diff, nil, nil, color_fn)
+
+            local text
+            if stack_count == 1 and stack_size == 1 then
+                text = label .. formatted_unit
+            else
+                text = label .. formatted_unit .. " / " .. formatted_total
+            end
+
+            profit_loss:SetText(text)
+        else
+            profit_loss:SetText(label)
+        end
+    else
+        profit_loss:SetText(aux.color.text.enabled("No data"))
+    end
 end
+
 
 
         refresh_button:Enable()

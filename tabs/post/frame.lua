@@ -319,13 +319,13 @@ end
 
 do
     local label = gui.label(frame.parameters, gui.font_size.medium)
-    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 100, 0)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 5, 0)
     final_stack_price = label
 end
 
 do
     local label = gui.label(frame.parameters, gui.font_size.medium)
-    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 101, -24)
+    label:SetPoint('TOPLEFT', unit_buyout_price_input, 'BOTTOMLEFT', 5, -24)
     profit_loss = label
 end
 

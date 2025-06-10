@@ -45,16 +45,14 @@ function M.to_string2(money, exact, color)
 		str = str .. format(fmt, GOLD, g)
 		fmt = PART
 	end
-	if s > 0 or c > 0 then
+	if s > 0 then
 		str = str .. format(fmt, SILVER, s)
 		fmt = PART
 	end
-	if c > 0 then
+	if c > 0 or str == '' then
 		str = str .. format(fmt, COPPER, c)
 	end
-	if str == '' then
-		str = NONE
-	end
+
 	return str
 end
 
@@ -63,61 +61,46 @@ function M.to_string(money, pad, trim, _, no_color)
     money = abs(money)
     local gold, silver, copper = to_gsc(money)
 
-local gold_color = '|cffffd100'   -- gold numbers color
-local silver_color = '|cff98b0e0' -- silver numbers color
-local copper_color = '|cffc8602c' -- copper numbers color
+    local gold_color = '|cffffd100'
+    local silver_color = '|cff98b0e0'
+    local copper_color = '|cffc8602c'
 
-local gold_text, silver_text, copper_text
+    local gold_text, silver_text, copper_text
 
-if no_color then
-    gold_text, silver_text, copper_text = 'g', 's', 'c'
-else
-    -- suffix letters with same color as numbers
-    gold_text = gold_color .. 'g|r'
-    silver_text = silver_color .. 's|r'
-    copper_text = copper_color .. 'c|r'
-end
-
--- Then when formatting the string:
-
-local result = ""
-
-if gold > 0 then
-    result = result .. gold_color .. tostring(gold) .. '|r' .. gold_text .. " "
-end
-
-if silver > 0 then
-    result = result .. silver_color .. tostring(silver) .. '|r' .. silver_text .. " "
-end
-
-result = result .. copper_color .. tostring(copper) .. '|r' .. copper_text
-
-
+    if no_color then
+        gold_text, silver_text, copper_text = 'g', 's', 'c'
+    else
+        gold_text = gold_color .. 'g|r'
+        silver_text = silver_color .. 's|r'
+        copper_text = copper_color .. 'c|r'
+    end
 
     local text
+
     if trim then
         local parts = T.temp - T.acquire()
         if gold > 0 then
             tinsert(parts, gold_color .. format('%d', gold) .. FONT_COLOR_CODE_CLOSE .. gold_text)
         end
         if silver > 0 then
-            tinsert(parts, silver_color .. format(pad and '%02d' or '%d', silver) .. FONT_COLOR_CODE_CLOSE .. silver_text)
+            tinsert(parts, silver_color .. format('%d', silver) .. FONT_COLOR_CODE_CLOSE .. silver_text)
         end
-        if copper > 0 or (gold == 0 and silver == 0) then
-            tinsert(parts, copper_color .. format(pad and '%02d' or '%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text)
+        if copper > 0 or (table.getn(parts) == 0) then
+            tinsert(parts, copper_color .. format('%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text)
         end
         text = aux.join(parts, ' ')
     else
+        local parts = {}
         if gold > 0 then
-            text = gold_color .. format('%d', gold) .. FONT_COLOR_CODE_CLOSE .. gold_text .. ' '
-                .. silver_color .. format(pad and '%02d' or '%d', silver) .. FONT_COLOR_CODE_CLOSE .. silver_text .. ' '
-                .. copper_color .. format(pad and '%02d' or '%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text
-        elseif silver > 0 then
-            text = silver_color .. format('%d', silver) .. FONT_COLOR_CODE_CLOSE .. silver_text .. ' '
-                .. copper_color .. format(pad and '%02d' or '%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text
-        else
-            text = copper_color .. format('%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text
+            tinsert(parts, gold_color .. format('%d', gold) .. FONT_COLOR_CODE_CLOSE .. gold_text)
         end
+        if silver > 0 then
+            tinsert(parts, silver_color .. format('%d', silver) .. FONT_COLOR_CODE_CLOSE .. silver_text)
+        end
+        if copper > 0 or (table.getn(parts) == 0) then
+            tinsert(parts, copper_color .. format('%d', copper) .. FONT_COLOR_CODE_CLOSE .. copper_text)
+        end
+        text = aux.join(parts, ' ')
     end
 
     if is_negative then
@@ -126,7 +109,6 @@ result = result .. copper_color .. tostring(copper) .. '|r' .. copper_text
 
     return text
 end
-
 
 function M.from_string(value)
 	local number = tonumber(value)
