@@ -64,7 +64,7 @@ function M.to_string(money, pad, trim, _, no_color)
     local gold, silver, copper = to_gsc(money)
 
 local gold_color = '|cffffd100'   -- gold numbers color
-local silver_color = '|cffe6e6e6' -- silver numbers color
+local silver_color = '|cff98b0e0' -- silver numbers color
 local copper_color = '|cffc8602c' -- copper numbers color
 
 local gold_text, silver_text, copper_text
