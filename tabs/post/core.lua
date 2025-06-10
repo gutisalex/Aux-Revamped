@@ -575,7 +575,7 @@ function refresh_entries()
         bid_records[item_key], buyout_records[item_key] = nil, nil
         local query = scan_util.item_query(selected_item.item_id)
         status_bar:update_status(0, 0)
-        status_bar:set_text('Scanning auctions...')
+        status_bar:set_text('|cff3399ffScanning auctions...|r')
 
 		scan_id = scan.start{
             type = 'list',
@@ -583,7 +583,7 @@ function refresh_entries()
 			queries = T.list(query),
 			on_page_loaded = function(page, total_pages)
                 status_bar:update_status(page / total_pages, 0) -- TODO
-                status_bar:set_text(format('Scanning Page %d / %d', page, total_pages))
+                status_bar:set_text(format('|cff3399ffScanning|r (Page |cffff8000%d|r / |cff00ff00%d|r)', page, total_pages))
 			end,
 			on_auction = function(auction_record)
 				if auction_record.item_key == item_key then
@@ -600,14 +600,14 @@ function refresh_entries()
 			on_abort = function()
 				bid_records[item_key], buyout_records[item_key] = nil, nil
                 status_bar:update_status(1, 1)
-                status_bar:set_text('Scan aborted')
+                status_bar:set_text('|cffff0000Scan aborted|r')
 			end,
 			on_complete = function()
 				bid_records[item_key] = bid_records[item_key] or T.acquire()
 				buyout_records[item_key] = buyout_records[item_key] or T.acquire()
                 refresh = true
                 status_bar:update_status(1, 1)
-                status_bar:set_text('Scan complete')
+                status_bar:set_text('|cff00ff00Scan complete|r')
             end,
 		}
 	end
