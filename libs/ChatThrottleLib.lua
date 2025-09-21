@@ -625,6 +625,23 @@ function ChatThrottleLib:SendAddonMessage(prio, prefix, text, chattype, target, 
 end
 
 
+-- Generic SendMessage wrapper function for compatibility
+function ChatThrottleLib:SendMessage(prio, prefix, text, chattype, language, destination, queueName, callbackFn, callbackArg)
+	if not self or not prio or not prefix or not text then
+		error('Usage: ChatThrottleLib:SendMessage("{BULK||NORMAL||ALERT}", "prefix", "text"[, "chattype"[, "language"[, "destination"]]])', 2)
+	end
+	
+	-- If chattype is not provided or is an addon-specific type, use SendAddonMessage
+	if not chattype or chattype == "ADDON" then
+		-- For addon messages, we need to rearrange parameters
+		-- SendAddonMessage(prio, prefix, text, chattype, target, queueName, callbackFn, callbackArg)
+		return self:SendAddonMessage(prio, prefix, text, "GUILD", destination, queueName, callbackFn, callbackArg)
+	else
+		-- For chat messages, use SendChatMessage
+		-- SendChatMessage(prio, prefix, text, chattype, language, destination, queueName, callbackFn, callbackArg)
+		return self:SendChatMessage(prio, prefix, text, chattype, language, destination, queueName, callbackFn, callbackArg)
+	end
+end
 
 
 -----------------------------------------------------------------------
