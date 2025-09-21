@@ -1,4 +1,5 @@
 ## Interface: 11200
+## Version: 1.0.0
 ## Author: shirsig
 ## OptionalDeps: ShaguTweaks
 ## Title: aux
